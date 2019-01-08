@@ -1,4 +1,4 @@
-package guiProject;
+package com.tma.jobmanager.gui;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 public class MenuMain {
+	protected static final BottomComposite m_bottomComposite = null;
 	MenuItem openItem;
 	
 	public MenuMain() {
@@ -43,6 +44,8 @@ public class MenuMain {
 		
 		final MenuItem helpItem = new MenuItem(menu, SWT.PUSH);
 		helpItem.setText("Help");
+		
+		
 		
 		/*Call exit GUI*/
 		exitItem.addSelectionListener(new SelectionListener() {
@@ -112,5 +115,20 @@ public class MenuMain {
 		shell.setMenuBar(menu);
 		
 
+	}
+	public void selectFile(BottomComposite bottomComposite){
+		openItem.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				bottomComposite.updateLeftComposite();
+			
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				
+			}
+		});
 	}
 }

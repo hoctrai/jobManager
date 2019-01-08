@@ -1,10 +1,12 @@
-package treeView;
+package com.tma.jobmanager.tree;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 
-import jobmanager.CategoryJob;
+import com.tma.jobmanager.target.CategoryJob;
+
+
 
 public class TreeCategory {
 	TreeNode m_Category = new TreeNode("Category");

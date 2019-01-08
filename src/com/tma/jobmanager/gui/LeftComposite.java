@@ -1,21 +1,22 @@
-package guiProject;
+package com.tma.jobmanager.gui;
 
 
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
-import treeView.FilterExecutionWorker;
-import treeView.FilterFree;
-import treeView.FilterPlanned;
-import treeView.FilterWorkedPool;
-import treeView.TreeCategory;
-import treeView.TreeNode;
+import com.tma.jobmanager.tree.TreeNode;
+import com.tma.jobmanager.tree.FilterExecutionWorker;
+import com.tma.jobmanager.tree.FilterFree;
+import com.tma.jobmanager.tree.FilterPlanned;
+import com.tma.jobmanager.tree.FilterWorkedPool;
+import com.tma.jobmanager.tree.TreeCategory;
+
 
 public class LeftComposite extends Composite {
 	TreeNode m_root;
 	
-	//FilterPlanned filterPlanned  = new FilterPlanned(getShell());
+	
 	FilterFree filterFree = new FilterFree();
 	FilterPlanned filterPlanned = new FilterPlanned();
 	FilterWorkedPool filterWorkedPool =new FilterWorkedPool();
@@ -65,17 +66,6 @@ public class LeftComposite extends Composite {
 			m_viewer.setInput(filterWorkedPool.filter(filterFree.getRoot()));
 			deleteTree(filterWorkedPool.getRoot());
 		}
-
-//		tabItem[0].setControl(filterFree.createTreeViewer(m_viewer[0],getShell()).getControl());
-//		
-//		tabItem[1].setControl(filterPlanned.createTreeViewer(m_viewer[1],filterFree).getControl());
-//		
-//		tabItem[2].setControl(filterWorkedPool.createTreeViewer(m_viewer[2],filterFree).getControl());
-//		
-//		//tabItem[3].setControl(filterExecutionWorker.createTreeViewer(m_viewer[3],filterFree).getControl());
-//		
-//		
-//		 tabFolder.setSize(400, 200);
 		 
 	}
 	

@@ -1,4 +1,4 @@
-package jobmanager;
+package com.tma.jobmanager.target;
 
 import java.util.ArrayList;
 import java.util.List;

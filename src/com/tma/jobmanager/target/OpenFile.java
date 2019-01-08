@@ -1,4 +1,4 @@
-package jobmanager;
+package com.tma.jobmanager.target;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import java.util.Queue;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
-import treeView.TreeNode;
+import com.tma.jobmanager.tree.TreeNode;
 
 public class OpenFile {
 	private String m_path=null;
@@ -79,7 +79,6 @@ public class OpenFile {
 			try {
 				line = m_inp.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -115,8 +114,6 @@ public class OpenFile {
 					}
 					else
 					parent.getTarget().addListCategoryJobs(new CategoryJob(m_stringQueue.peek()));
-//					firstChild = new TreeNode(m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5) );
-//					parent.addChild(firstChild);
 					
 				}
 				else{
@@ -153,24 +150,11 @@ public class OpenFile {
 				else if(m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5).equals("Started")) {
 					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setStarted(new Started());
 					m_stringQueue.remove();
-//					while(!m_stringQueue.peek().substring(0, 4).equals("<h2>")&& !m_stringQueue.isEmpty()) {
-//						parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).getStared().setStrStarter(m_stringQueue.peek());
-//						m_stringQueue.remove();
-//					}
+
 				}
 				
 				
-			}else {
-//				if(firstChild == null){
-//					parent.setStrParameters(m_stringQueue.peek());
-//					m_stringQueue.remove();
-//				
-//				}else if(secondChild == null){
-//					firstChild.setStrParameters(m_stringQueue.peek());
-//					m_stringQueue.remove();
-//				
-//				}else {
-				
+			}else {				
 				if(m_stringQueue.peek().substring(0,5).equals("Timer")){
 					
 					try {
@@ -178,24 +162,17 @@ public class OpenFile {
 					} catch (NumberFormatException e) {
 						parent.getTarget().setStrTimerTasks(m_stringQueue.peek().substring(13,m_stringQueue.peek().length()));
 					}
-					
 					m_stringQueue.remove();
 					
 				}else{
-					//System.out.println(m_stringQueue.peek());
 					try{
-						//System.out.println("asdfsadf   "+ parent.getTarget().getListCategoryJobs().get(i).getPlanned().getStrPlan().size());
+						
 						int i = parent.getTarget().getListCategoryJobs().size()-1;
-						//if(parent.getTarget().getListCategoryJobs().get(i).getPlanned().getNamePlan() != "")
-							parent.getTarget().getListCategoryJobs().get(i).getStared().setStrStarter(m_stringQueue.peek());
+						parent.getTarget().getListCategoryJobs().get(i).getStared().setStrStarter(m_stringQueue.peek());
 						
-						
-						//parent.getTarget().getListCategoryJobs().get(i).getPlanned().setStringPlan(m_stringQueue.peek());
 					} catch (Exception e) {
-						//parent.addChild(new TreeNode(m_stringQueue.peek()));
+						System.out.println(e);
 					}
-					
-					//secondChild.setStrParameters(m_stringQueue.peek());
 				m_stringQueue.remove();}
 				
 				}

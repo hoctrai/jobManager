@@ -1,4 +1,4 @@
-package treeView;
+package com.tma.jobmanager.tree;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

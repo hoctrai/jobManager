@@ -1,11 +1,11 @@
-package jobmanager;
+package com.tma.jobmanager.target;
 
 public class CategoryJob{
-	String m_name;
+	private String m_name;
 	private Planned m_planned;
 	private Ongoing m_ongoing;
 	private Started m_stared;
-	/*--------*/
+	
 	public CategoryJob(String name) {
 		this.m_name = name;
 		this.m_planned = null;

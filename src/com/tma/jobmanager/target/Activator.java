@@ -1,4 +1,4 @@
-package jobmanager;
+package com.tma.jobmanager.target;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

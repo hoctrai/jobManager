@@ -1,4 +1,4 @@
-package treeView;
+package com.tma.jobmanager.tree;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -6,7 +6,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabItem;
 
-import jobmanager.OpenFile;
+import com.tma.jobmanager.target.OpenFile;
 
 public class FilterFree {
 
@@ -44,8 +44,9 @@ public class FilterFree {
 				Object newInput) {
 	      }
 	    });
+		m_root = arrangementTree.sortTree(getRootNode(shell));
 		
-		viewer.setInput(getRootNode(shell));
+		viewer.setInput(m_root);
 		
 		return viewer;
 		//return null;
@@ -54,12 +55,13 @@ public class FilterFree {
 	
 	private TreeNode getRootNode(Shell shell){
 	
-		m_root = new TreeNode("rootNode");
+		TreeNode root = new TreeNode("");
+		//m_root = new TreeNode("rootNode");
 		m_openFile.diagogOpenFile(shell);
 		if(m_openFile.getM_path()!=null)
-			m_root = m_openFile.getTargets();
-		System.out.println("FilterFree   at here"+ m_root.getChildren().size());
-		return m_root;
+			root = m_openFile.getTargets();
+		System.out.println("FilterFree   at here"+ root.getChildren().size());
+		return root;
 		
 	}
 	public TabItem createTreeViewer( Shell shell) {

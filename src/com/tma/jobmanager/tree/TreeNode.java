@@ -1,9 +1,11 @@
-package treeView;
+package com.tma.jobmanager.tree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jobmanager.Target;
+import com.tma.jobmanager.target.Target;
+
+
 
 
 public class TreeNode {

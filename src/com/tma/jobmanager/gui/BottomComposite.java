@@ -1,4 +1,4 @@
-package guiProject;
+package com.tma.jobmanager.gui;
 
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -8,15 +8,16 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
-import jobmanager.Target;
+import com.tma.jobmanager.target.Target;
+
+
 
 public class BottomComposite extends Composite {
 
 	LeftComposite m_leftComposite;
 	RightComposite m_rightComposite;
 	
-	private Target m_target;
-
+	
 	/**
 	 * Create the composite.
 	 * @param parent
@@ -31,18 +32,17 @@ public class BottomComposite extends Composite {
 	public void clickNode(){
 		
 		m_leftComposite.m_viewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			
-			
+			Target target;
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				if(event.getSelection() instanceof IStructuredSelection) {
 					try{
 						IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 						String strTarget = selection.getFirstElement().toString();
-						findObject(strTarget);
+						target = findObject(strTarget);
 //						updateRightComposite("");
-						m_rightComposite.showDataTarget(m_target);
-						m_rightComposite.showRunTarget(m_target);
+						m_rightComposite.showDataTarget(target);
+						m_rightComposite.showRunTarget(target);
 						System.out.println("\n");
 						
 					}catch (Exception e) {
@@ -53,8 +53,10 @@ public class BottomComposite extends Composite {
 		});
 	}
 	
-	public  void findObject(String strTarget) {
+	public  Target findObject(String strTarget) {
+		Target target ;
 		try{
+			
 			String targetName;
 			
 			for(int i = 0 ; i <m_leftComposite.filterFree.getRoot().getChildren().size() ; i++ ){
@@ -62,13 +64,13 @@ public class BottomComposite extends Composite {
 				targetName = m_leftComposite.filterFree.getRoot().getChildren().get(i).getTarget().getName();
 				if(strTarget.equals(targetName.substring(4, targetName.length()-5))){
 					
-					m_target = m_leftComposite.filterFree.getRoot().getChildren().get(i).getTarget();
-					updateRightComposite(m_target.toString());
-					
-					break;
+					target = m_leftComposite.filterFree.getRoot().getChildren().get(i).getTarget();
+					updateRightComposite(target.toString());
+					return target;
 				}
 			}
 		}catch(Exception e){	/****/		}
+		return null;
 	}
 	
 	public void updateRightComposite(String text){

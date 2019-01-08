@@ -1,4 +1,4 @@
-package treeView;
+package com.tma.jobmanager.tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 
-import jobmanager.CategoryJob;
+import com.tma.jobmanager.target.CategoryJob;
 
 public class FilterPlanned {
 	TreeViewer viewer;

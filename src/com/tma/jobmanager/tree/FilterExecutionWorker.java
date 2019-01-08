@@ -1,4 +1,4 @@
-package treeView;
+package com.tma.jobmanager.tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,24 +7,21 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 
-import jobmanager.CategoryJob;
+import com.tma.jobmanager.target.CategoryJob;
 
 public class FilterExecutionWorker {
 	List<String> m_categoryJobs = new ArrayList<>();
-	TreeNode m_root = new TreeNode("root");
+	private TreeNode m_root = new TreeNode("root");
 	public FilterExecutionWorker(){
 		
 	}
 	
 	public TreeViewer createTreeViewer(TreeViewer viewer, FilterFree  filterFree) {
-		//viewer = new TreeViewer(parent);
 		
 		viewer.setContentProvider(new ITreeContentProvider() {
 			public Object[] getChildren(Object parentElement) {
-				
 				return ((TreeNode) parentElement).getChildren().toArray();
 			}
-			
 			public Object getParent(Object element) {
 		    	return ((TreeNode) element).getParent();
 			}
@@ -42,21 +39,17 @@ public class FilterExecutionWorker {
 	    });
 		filter(filterFree.m_root);
 		viewer.setInput(m_root);
-		//System.out.println("root.size=  " + root.getChildren().size());
 		return viewer;
 		
 	}
-	int k=0;
 
 	public TreeNode filter(TreeNode root) {
 		TreeNode node = new TreeNode("");
 		try{
 			for(int i = 0; i < root.getChildren().size()-1; i++) {
-				//System.out.println("a	"+root.getChildren().get(i).getName()+"  "+root.getChildren().get(i).getTarget().getListCategoryJobs().size());
 				int n = root.getChildren().get(i).getTarget().getListCategoryJobs().size();
 				if(n > 0) {
 					for(int j = 0; j < n; j++) {
-						
 						CategoryJob categoryJob = root.getChildren().get(i).getTarget()
 								.getListCategoryJobs().get(j);
 						if(categoryJob.getStared().getStrStarter().size()>0) {
@@ -64,8 +57,6 @@ public class FilterExecutionWorker {
 							node = root.getChildren().get(i);
 							this.m_root.addChild(node);
 							
-//							if(setCategory(categoryJob.getName())==true);
-//							m_categoryJobs.add(categoryJob.getName());
 						}
 					}
 				}
@@ -73,21 +64,19 @@ public class FilterExecutionWorker {
 		}catch (Exception e) {
 			
 		}
-		
 		return m_root;
 	}
-//	public boolean setCategory(String categoryJob){
-//		for(int i = 0; i < m_categoryJobs.size(); i++){
-//			if(m_categoryJobs.get(i).equals(categoryJob))
-//				return false;
-//		}
-//			
-//		return true;
-//		
-//	}
 
 	public TreeNode getRoot() {
-		// TODO Auto-generated method stub
 		return m_root;
 	}
+
+	public TreeNode getM_root() {
+		return m_root;
+	}
+
+	public void setM_root(TreeNode m_root) {
+		this.m_root = m_root;
+	}
+	
 }

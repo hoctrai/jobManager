@@ -1,4 +1,4 @@
-package guiProject;
+package com.tma.jobmanager.gui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,12 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
-import jobmanager.Ongoing;
-import jobmanager.Planned;
-import jobmanager.Started;
-import jobmanager.Target;
-import treeView.ReadStates;
+import com.tma.jobmanager.target.Ongoing;
+import com.tma.jobmanager.target.Planned;
+import com.tma.jobmanager.target.Started;
+import com.tma.jobmanager.target.Target;
+import com.tma.jobmanager.tree.ReadStates;
+
 
 
 public class RightComposite extends Composite {
