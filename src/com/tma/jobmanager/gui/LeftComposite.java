@@ -9,6 +9,7 @@ import com.tma.jobmanager.tree.TreeNode;
 import com.tma.jobmanager.tree.FilterExecutionWorker;
 import com.tma.jobmanager.tree.FilterFree;
 import com.tma.jobmanager.tree.FilterPlanned;
+import com.tma.jobmanager.tree.FilterStates;
 import com.tma.jobmanager.tree.FilterWorkedPool;
 import com.tma.jobmanager.tree.TreeCategory;
 
@@ -18,9 +19,7 @@ public class LeftComposite extends Composite {
 	
 	
 	FilterFree filterFree = new FilterFree();
-	FilterPlanned filterPlanned = new FilterPlanned();
-	FilterWorkedPool filterWorkedPool =new FilterWorkedPool();
-	FilterExecutionWorker filterExecutionWorker = new FilterExecutionWorker();
+	FilterStates statets;
 	TreeCategory treeCategory = new TreeCategory();
 	
 	TreeViewer m_viewer;
@@ -54,17 +53,21 @@ public class LeftComposite extends Composite {
 		
 		else if(string.equals(""))
 			m_viewer.setInput(filterFree.getRoot());
+		
 		else if(string.equals("Planned")){
-			m_viewer.setInput(filterPlanned.filter(filterFree.getRoot()));
-			deleteTree(filterPlanned.getRoot());
+			statets = new FilterPlanned();
+			m_viewer.setInput(statets.filter(filterFree.getRoot()));
+			deleteTree(statets.getRoot());
 			
 		}else if(string.equals("Execution")){
-			m_viewer.setInput(filterExecutionWorker.filter(filterFree.getRoot()));
-		deleteTree(filterExecutionWorker.getRoot());
+			statets = new FilterExecutionWorker();
+			m_viewer.setInput(statets.filter(filterFree.getRoot()));
+		deleteTree(statets.getRoot());
 		
 		}else if(string.equals("Worked Pool")){
-			m_viewer.setInput(filterWorkedPool.filter(filterFree.getRoot()));
-			deleteTree(filterWorkedPool.getRoot());
+			statets = new FilterWorkedPool();
+			m_viewer.setInput(statets.filter(filterFree.getRoot()));
+			deleteTree(statets.getRoot());
 		}
 		 
 	}
@@ -80,13 +83,11 @@ public class LeftComposite extends Composite {
 			treeCategory.treeCategory(filterFree.getRoot());
 		}
 		else{
-			treeCategory.createTreeViewer(m_viewer, string);
+			//treeCategory.createTreeViewer(m_viewer, string);
+			
+			m_viewer.setInput(treeCategory.find(string));
 			System.out.println("LeftComposite:  row:  92");
 		}
 	}
-	
-	
-	
-	
 }
 

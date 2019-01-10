@@ -30,7 +30,7 @@ public class CategoryJob{
 	public void setOngoing(Ongoing m_ongoing) {
 		this.m_ongoing = m_ongoing;
 	}
-	public Started getStared() {
+	public Started getStarted() {
 		return m_stared;
 	}
 	public void setStarted(Started m_stared) {

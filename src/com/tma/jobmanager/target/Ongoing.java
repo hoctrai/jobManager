@@ -4,17 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ongoing {
-	private List<String> strOngoing;
+	private String strStatus;
+	private List<String> m_strOngoing;
+	
 	public Ongoing() {
-		strOngoing = new ArrayList<>();
+		strStatus="";
+		m_strOngoing = new ArrayList<>();
 	}
 	
-	public List<String> getStrOngoing() {
-		return strOngoing;
+	public String getStatus() {
+		return strStatus;
+	}
+	public void setStatus(String status) {
+		this.strStatus = status;
 	}
 
-	public void setStrOngoing(String strOngoing) {
-		this.strOngoing.add(strOngoing);
+	public List<String> getStrOngoing() {
+		return m_strOngoing;
 	}
-	
+	public void setStrOngoing(String strOngoing) {
+		this.m_strOngoing.add(strOngoing);
+	}
 }

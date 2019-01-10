@@ -1,7 +1,5 @@
 package com.tma.jobmanager.tree;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 
 public class ReadStates {
@@ -43,7 +41,6 @@ public class ReadStates {
 		this.server = server;
 	}
 
-	
 	public void read(String[] strParent) {
 		for(int k = 1; k < strParent.length; k++){
 			Optional<String> opt = Optional.ofNullable(strParent[k]);
@@ -58,36 +55,6 @@ public class ReadStates {
 				server = opt.filter(x->x.contains("Server")).get().replaceAll("Server:", "");
 			
 		}
-		//System.out.println(submit.substring(6).replaceAll(" CST", ""));
-		
-		
-		
-//		DateFormat sdf = new SimpleDateFormat("MM dd'T'HH:mm:ss.SSSZ CST yyyy");
-//		String pattern ="MM dd'T'HH:mm:ss.SSSZ CST yyyy";
-//		DateTimeFormatter dtf = DateTimeFormat.forPattern(pattern);
-//		DateTime dateTime = dtf.parseDateTime(submit.substring(2, 21));
-	//System.out.println(date);
-	}
-	
-	public boolean checkFilter(String submit, String start) {
-		SimpleDateFormat formatter1=new SimpleDateFormat("MMM dd HH:mm:ss.Z yyyy");
-		Date dateNow, dateStart;
-		try {
-//		dateSubmit = formatter1.parse(submit.substring(6).replaceAll(" CST", ".+0600"));
-		dateNow = new Date();
-		dateStart = formatter1.parse(submit.substring(6).replaceAll(" CST", ".+0600"));
-		//compare = formatter1.parse("");
-		if(dateStart.after(dateNow)) {
-			return true;
-		}
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-		//System.out.println("aaaaaaaaa:	"+date);
-		
-		
-		
-		return false;
 	}
 
 }

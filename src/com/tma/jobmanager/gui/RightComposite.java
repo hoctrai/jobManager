@@ -34,20 +34,8 @@ public class RightComposite extends Composite {
 	 */
 	public RightComposite(Composite parent, int style) {
 		super(parent, style);
-		//windowExecute(getShell());
 	}
 	
-	
-//	public Text getText() {
-//		return text;
-//	}
-//
-//	
-//	public void setText(String text) {
-//		
-//		this.text.setText(text);
-//	}
-
 	public void gridText(){
 		
 	}
@@ -57,19 +45,13 @@ public class RightComposite extends Composite {
 		setLayout(new GridLayout(1, false));
 		
 		m_table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
+		
 		GridData gd_table = new GridData(GridData.FILL_HORIZONTAL);
 		gd_table.heightHint = 68;
+		
 		m_table.setLayoutData(gd_table);
 		m_table.setHeaderVisible(true);
 		m_table.setLinesVisible(true);
-		
-//		table = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
-//		GridData gd_table = new GridData(GridData.FILL_BOTH);
-//		//gd_table.widthHint = 236;
-//		table.setLayoutData(gd_table);
-		
-//		table.setHeaderVisible(true);
-//		table.setLinesVisible(true);
 		
 		TableColumn columnName = new TableColumn(m_table, SWT.CENTER);
 		columnName.setWidth(50);
@@ -110,10 +92,7 @@ public class RightComposite extends Composite {
 		
 		m_item.add( new TableItem(m_table, SWT.NONE));
 		m_item.add( new TableItem(m_table, SWT.NONE));
-		
-		
 	}
-	/*-------------------------------------------------------------------------------------------------------------*/
 	
 	public void showDataTarget(Target target){
 		
@@ -125,7 +104,8 @@ public class RightComposite extends Composite {
 		String NameTarget =  s.substring(4,s.length()-5);
 		String nameCategory="", id="", type="";
 		//String submit="", start="", timeout="", server="";
-		//m_item.get(0).setText(new String[] {"", "", "", "", "", "", "", ""});
+		m_item.get(0).setText(new String[] {"", "", "", "", "", "", "", ""});
+		m_item.get(1).setText(new String[] {"", "", "", "", "", "", "", ""});
 		for (int i = 0; i<target.getListCategoryJobs().size(); i++){
 			
 			int j = 0;
@@ -160,11 +140,14 @@ public class RightComposite extends Composite {
 				s = target.getListCategoryJobs().get(i).getName();
 				ongoing = target.getListCategoryJobs().get(i).getOngoing();
 				nameCategory = s.substring(4, s.length()-5);
+				
 				int t = 0;
 				while(j<n){
+					
 					s= ongoing.getStrOngoing().get(t);
 					String[] strParent = s.split(",");
 					String[] strChild = strParent[0].split(":");
+					
 					id = strChild [0];
 					type = strChild[2];
 					
@@ -174,15 +157,12 @@ public class RightComposite extends Composite {
 					j++;
 					t++;
 				}
-				
-				//m_item.get(n).setText(new String[] {"", "", "", "", "", "", "", ""});
-				
 			}
 			
-			n = n + target.getListCategoryJobs().get(i).getStared().getStrStarter().size();
+			n = n + target.getListCategoryJobs().get(i).getStarted().getStrStarter().size();
 			if(n > j){
 				s = target.getListCategoryJobs().get(i).getName();
-				started = target.getListCategoryJobs().get(i).getStared();
+				started = target.getListCategoryJobs().get(i).getStarted();
 				nameCategory = s.substring(4, s.length()-5);
 				int t = 0;
 				while(j < n){
@@ -198,14 +178,7 @@ public class RightComposite extends Composite {
 					j++;
 					t++;
 				}
-				
 			}
-			
-		}
-		try{
-			//m_item.get(n).setText(new String[] {"", "", "", "", "", "", "", ""});
-		}catch (Exception e) {
-			
 		}
 	}
 	
@@ -219,9 +192,9 @@ public class RightComposite extends Composite {
 		
 		for(int i = 0; i < target.getListCategoryJobs().size(); i++ ){
 			String nameCategory = target.getListCategoryJobs().get(i).getName();
-			String namePlan = target.getListCategoryJobs().get(i).getPlanned().getNamePlan();
+			String namePlan = "<h3>Planned</h3>";
 			str = str + "\n" + nameCategory + "\n" + namePlan;
-			//**************************************************************/
+			
 			n = target.getListCategoryJobs().get(i).getPlanned().getStrPlan().size();
 			for(int j = 0; j < n; j++){
 				String planned = target.getListCategoryJobs().get(i).getPlanned().getStrPlan().get(j);
@@ -234,31 +207,22 @@ public class RightComposite extends Composite {
 				str = str + "\n" + target.getListCategoryJobs().get(i).getOngoing().getStrOngoing().get(j);
 			
 			str = str + "\n" + started;
-			n = target.getListCategoryJobs().get(i).getStared().getStrStarter().size();
+			n = target.getListCategoryJobs().get(i).getStarted().getStrStarter().size();
 			for(int j = 0; j < n; j++)
-				str = str + "\n" + target.getListCategoryJobs().get(i).getStared().getStrStarter().get(j);
-			
-			
+				str = str + "\n" + target.getListCategoryJobs().get(i).getStarted().getStrStarter().get(j);
 		}
 		String strJobPerFamily = "<h2>Executing jobs per Family</h2>";
 		str = str + "\n" + strJobPerFamily +"\n"+ target.getJobsPerJobFamily();
-		
-		
 		m_text.setText(str);
 	}
 	
-
 	@Override
 	protected void checkSubclass() {
 		
 	}
-
-
 	public Text getText() {
 		return m_text;
 	}
-
-
 	public void setValueText(String text) {
 		this.m_text.setText(text);
 	}

@@ -4,28 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Started {
-	private String stringStarter;
-	private List<String> strStarter;
+	
+	private String strStatus;
+	private List<String> m_strStarter;
+	
 	public Started() {
-		this.stringStarter = "";
-		this.strStarter = new ArrayList<>();
+		this.strStatus = "";
+		this.m_strStarter = new ArrayList<>();
 	}
 	
-	public String getStringStarter() {
-		return stringStarter;
+	public String getStatus() {
+		return strStatus;
 	}
-	
-	public void setStringStarter(String stringStarter) {
-		this.stringStarter = stringStarter;
+	public void setStatus(String status) {
+		this.strStatus = status;
 	}
 
 	public List<String> getStrStarter() {
-		return strStarter;
+		return m_strStarter;
 	}
-
 	public void setStrStarter(String strStarter) {
-		this.strStarter.add(strStarter);
+		this.m_strStarter.add(strStarter);
 	}
-
-	
 }

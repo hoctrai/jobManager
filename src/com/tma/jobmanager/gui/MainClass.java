@@ -25,24 +25,26 @@ public class MainClass {
 		
 		Display display = new Display();
 		Shell shell = new Shell(display);
-		shell.setSize(690, 319);
+		shell.setSize(861, 540);
 		shell.setLayout(new GridLayout(1, false));
 		
 		/* Call menu */
 		m_menuMain.menu(shell);
 		
 		Composite parent = new Composite(shell, SWT.BORDER);
-		
-		GridData gd_parent = new GridData(GridData.FILL_BOTH);
-		parent.setLayoutData(gd_parent);
+		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
 		parent.setLayout(new GridLayout(1, false));
 		
+		/*Call TopComposite*/
 		m_mainClass.m_topComposite = new TopComposite(parent, SWT.NONE);
 		
 		/*Call BottomComposite*/
-		
 		m_mainClass.m_bottomComposite = new BottomComposite(parent, SWT.NONE);
+		GridData gd_bottomComposite = new GridData(GridData.FILL_BOTH);
+		m_mainClass.m_bottomComposite.setLayoutData(gd_bottomComposite);
 		m_mainClass.m_bottomComposite.addComposite();
+	
+		
 		System.out.println("MainClass:   row: 199");
 		
 		
@@ -57,10 +59,5 @@ public class MainClass {
 				display.sleep();
 		}
 		display.dispose();
-		
-		
-		
-		
- 
 	}
 }

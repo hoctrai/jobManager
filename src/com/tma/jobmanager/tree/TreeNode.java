@@ -16,6 +16,7 @@ public class TreeNode {
 	private String m_strParameters;
 	private List<TreeNode> m_children = new ArrayList<TreeNode>();
 	private TreeNode m_parent;
+	private List<String> m_strJobs = new ArrayList<>();
 
 	public TreeNode( String name) {
 
@@ -77,5 +78,15 @@ public class TreeNode {
 		return m_name;
 	}
 
+	public List<String> getStrJobs() {
+		return m_strJobs;
+	}
+
+	public void setStrJobs(List<String> strJobs) {
+		this.m_strJobs = strJobs;
+	}
+	public void addStrJobs(String strJob){
+		this.m_strJobs.add(strJob);
+	}
 	
 }

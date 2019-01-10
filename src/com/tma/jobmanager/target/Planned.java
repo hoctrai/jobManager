@@ -6,28 +6,25 @@ import java.util.ArrayList;
 public class Planned {
 
 	private List<String> m_strPlan ;
-	private String m_namePlan;
-	public Planned(String Plan) {
-		this.m_namePlan = Plan;
+	private String strStatus;
+	
+	public Planned() {
+		this.strStatus = "";
 		this.m_strPlan = new ArrayList<>();
 		
 	}
 	
-	public String getNamePlan() {
-		return m_namePlan;
+	public String getStatus() {
+		return strStatus;
 	}
-
-	public void setNamePlan(String namePlan) {
-		this.m_namePlan = namePlan;
+	public void setStatus(String status) {
+		this.strStatus = status;
 	}
 
 	public List<String> getStrPlan() {
 		return m_strPlan;
 	}
-
 	public void setStrPlan(String strPlan) {
 		this.m_strPlan.add(strPlan);
 	}
-	
-	
 }

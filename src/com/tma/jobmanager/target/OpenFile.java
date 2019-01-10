@@ -14,10 +14,13 @@ import org.eclipse.swt.widgets.Shell;
 import com.tma.jobmanager.tree.TreeNode;
 
 public class OpenFile {
+	
 	private String m_path=null;
-	private Queue<String> m_stringQueue;
+	
 	private FileInputStream m_in;
 	private BufferedReader m_inp;
+	
+	private Queue<String> m_stringQueue;
 	private TreeNode m_targets;
 	
 	public void diagogOpenFile(Shell shell){
@@ -27,16 +30,20 @@ public class OpenFile {
 			 readFile( );
 	}
 	
-	public String getM_path() {
+	public String getPath() {
 		return m_path;
+	}
+	
+	public void setPath(String path){
+		this.m_path = path;
 	}
 	
 	public Queue<String> getM_stringQueue() {
 		return m_stringQueue;
 	}
 
-	public void setM_stringQueue(Queue<String> m_stringQueue) {
-		this.m_stringQueue = m_stringQueue;
+	public void setM_stringQueue(Queue<String> stringQueue) {
+		this.m_stringQueue = stringQueue;
 	}
 	
 	public TreeNode getTargets() {
@@ -53,7 +60,7 @@ public class OpenFile {
 		String line;
 		m_stringQueue = new LinkedList<String>();
 		try {
-			 m_in = new FileInputStream(getM_path());
+			 m_in = new FileInputStream(m_path);
 			 m_inp = new BufferedReader(new InputStreamReader(m_in));
 			try {
 				m_targets = new TreeNode("Targets:");
@@ -65,6 +72,7 @@ public class OpenFile {
 			m_in.close();
 			m_inp.close();
 			} catch (IOException e) {
+				
 				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e) {
@@ -125,30 +133,37 @@ public class OpenFile {
 			}else if(m_stringQueue.peek().substring(0, 4).equals("<h3>") && parent!=null) {
 				
 				if(m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5).equals("Planned")){
-					Planned planned = new Planned(m_stringQueue.peek());
-					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setPlanned(planned);
+					Planned planned = new Planned();
+//					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setPlanned(planned);
 					m_stringQueue.remove();
 					
 					while(!m_stringQueue.peek().substring(0, 4).equals("<h3>")){
-							parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).getPlanned().setStrPlan(m_stringQueue.peek());
-							m_stringQueue.remove();
+						planned.setStatus("Planned");
+						//parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).getPlanned().setStrPlan(m_stringQueue.peek());
+						planned.setStrPlan(m_stringQueue.peek());
+						m_stringQueue.remove();
 							
-						
 					}
+					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setPlanned(planned);
 				}
 				
 				else if(m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5).equals("Ongoing")) {
-					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setOngoing(new Ongoing());
+					Ongoing ongoing = new Ongoing();
+					//parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setOngoing(ongoing);
 					m_stringQueue.remove();
 					
 					while(!m_stringQueue.peek().substring(0, 4).equals("<h3>")) {
-						parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).getOngoing().setStrOngoing(m_stringQueue.peek());
+						ongoing.setStatus("ongoing");
+						ongoing.setStrOngoing(m_stringQueue.peek());
+						//parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).getOngoing().setStrOngoing(m_stringQueue.peek());
 						m_stringQueue.remove();
 					}
+					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setOngoing(ongoing);
 				}
 				
 				else if(m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5).equals("Started")) {
-					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setStarted(new Started());
+					Started started = new Started();
+					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setStarted(started);
 					m_stringQueue.remove();
 
 				}
@@ -163,18 +178,27 @@ public class OpenFile {
 						parent.getTarget().setStrTimerTasks(m_stringQueue.peek().substring(13,m_stringQueue.peek().length()));
 					}
 					m_stringQueue.remove();
-					
-				}else{
+				
+				}else if(m_stringQueue.peek().substring(0,7).equals("Managed")){
+					try{
+						parent.addStrJobs(m_stringQueue.peek());
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+					m_stringQueue.remove();
+				}
+				else{
 					try{
 						
 						int i = parent.getTarget().getListCategoryJobs().size()-1;
-						parent.getTarget().getListCategoryJobs().get(i).getStared().setStrStarter(m_stringQueue.peek());
+						parent.getTarget().getListCategoryJobs().get(i).getStarted().setStrStarter(m_stringQueue.peek());
+						parent.getTarget().getListCategoryJobs().get(i).getStarted().setStatus("started");
 						
-					} catch (Exception e) {
-						System.out.println(e);
+					}catch(Exception e){
+						e.printStackTrace();
 					}
-				m_stringQueue.remove();}
-				
+					m_stringQueue.remove();}
+//				
 				}
 			}
 		return parent;

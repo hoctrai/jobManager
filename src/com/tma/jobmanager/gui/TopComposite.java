@@ -33,9 +33,8 @@ public class TopComposite extends Composite {
 		new Label(this, SWT.NONE);
 		
 		Label lblNewLabel = new Label(this, SWT.NONE);
-		//lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		lblNewLabel.setText("Style");
-		new Label(this, SWT.NONE);
+		lblNewLabel.setText("Style: ");
+//		new Label(this, SWT.NONE);
 		
 		String[] itemsType = {"Target: ", "Categoryjob", "States"};
 		
@@ -43,19 +42,18 @@ public class TopComposite extends Composite {
 		GridData gd_combo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_combo.widthHint = 101;
 		m_comboType.setLayoutData(gd_combo);
-		m_comboType.setText("Type");
 		m_comboType.setItems(itemsType);
-		new Label(this, SWT.NONE);
 		
+		new Label(this, SWT.NONE);
 		Label lblNewLabel_1 = new Label(this, SWT.NONE);
-		lblNewLabel_1.setText("Value");
+		lblNewLabel_1.setText("Value: ");
+		
 		new Label(this, SWT.NONE);
 		
 		m_comboValue = new Combo(this, SWT.NONE);
 		GridData gd_combo_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_combo_1.widthHint = 103;
 		m_comboValue.setLayoutData(gd_combo_1);
-		m_comboValue.setText("Value");
 		m_comboValue.setEnabled(false);
 		
 		
@@ -66,7 +64,7 @@ public class TopComposite extends Composite {
 			
 			public void widgetSelected(SelectionEvent e) {
 				if(m_comboType.getText().equals("Target: ")){
-					String [] id = new String[m_bottomComposite.m_leftComposite.filterFree.getRoot().getChildren().size()+1];
+					String [] id = new String[m_bottomComposite.m_leftComposite.filterFree.getRoot().getChildren().size()];
 					id[0] = ""; 
 					for(int i = 0; i < m_bottomComposite.m_leftComposite.filterFree.getRoot().getChildren().size(); i++){
 						id[i+1] = String.valueOf(m_bottomComposite.m_leftComposite.filterFree.getRoot().getChildren().get(i).getId());

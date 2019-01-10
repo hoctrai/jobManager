@@ -40,13 +40,13 @@ public class BottomComposite extends Composite {
 						IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 						String strTarget = selection.getFirstElement().toString();
 						target = findObject(strTarget);
-//						updateRightComposite("");
 						m_rightComposite.showDataTarget(target);
 						m_rightComposite.showRunTarget(target);
 						System.out.println("\n");
 						
 					}catch (Exception e) {
-						System.out.println("bottomComposite:  row:  47 "+e);
+						System.out.println("bottomComposite:  row:  47 ");
+						e.printStackTrace();
 					}
 				}
 			}
@@ -69,7 +69,9 @@ public class BottomComposite extends Composite {
 					return target;
 				}
 			}
-		}catch(Exception e){	/****/		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -85,20 +87,15 @@ public class BottomComposite extends Composite {
 
 	}
 	
-	/*---------------------------------------*/
-
 	public void addComposite(){
 		
 		m_leftComposite = new LeftComposite(this, SWT.NONE);
-		//m_leftComposite.populateControl();
 		
 		GridData gd_leftComposite = new GridData(GridData.FILL_VERTICAL);
 		gd_leftComposite.widthHint = 238;
 		gd_leftComposite.heightHint = 447;
 		m_leftComposite.setLayoutData(gd_leftComposite);
 		m_leftComposite.populateControl();
-		
-		
 		
 		m_rightComposite = new RightComposite(this, SWT.NONE);
 		GridData gd_rightComposite = new GridData(GridData.FILL_BOTH); 
@@ -110,7 +107,6 @@ public class BottomComposite extends Composite {
 		
 	}
 	
-
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components

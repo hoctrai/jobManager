@@ -12,7 +12,6 @@ public class FilterFree {
 
 	ArrangementTree arrangementTree = new ArrangementTree();
 	TreeNode m_root;
-	//private TreeViewer viewer;
 	OpenFile m_openFile = new OpenFile();
 	
 	public FilterFree() {
@@ -20,26 +19,27 @@ public class FilterFree {
 	}
 	public TreeViewer createTreeViewer(TreeViewer viewer,Shell shell) {
 		
-		
-		
 		viewer.setContentProvider(new ITreeContentProvider() {
 			
 		public Object[] getChildren(Object parentElement) {
-			
 			return ((TreeNode) parentElement).getChildren().toArray();
 		}
 		
 		public Object getParent(Object element) {
 	    	return ((TreeNode) element).getParent();
 		}
+		
 		public boolean hasChildren(Object element) {
 			return ((TreeNode) element).getChildren().size() > 0;
 		}
+		
 		public Object[] getElements(Object inputElement) {
 			return ((TreeNode) inputElement).getChildren().toArray();
 		}
+		
 		public void dispose() {
 		}
+		
 		public void inputChanged(Viewer viewer, Object oldInput,
 				Object newInput) {
 	      }
@@ -49,23 +49,19 @@ public class FilterFree {
 		viewer.setInput(m_root);
 		
 		return viewer;
-		//return null;
 		
 	}
 	
 	private TreeNode getRootNode(Shell shell){
 	
 		TreeNode root = new TreeNode("");
-		//m_root = new TreeNode("rootNode");
 		m_openFile.diagogOpenFile(shell);
-		if(m_openFile.getM_path()!=null)
+		if(m_openFile.getPath()!=null)
 			root = m_openFile.getTargets();
-		System.out.println("FilterFree   at here"+ root.getChildren().size());
 		return root;
 		
 	}
 	public TabItem createTreeViewer( Shell shell) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	public TreeNode getRoot() {
