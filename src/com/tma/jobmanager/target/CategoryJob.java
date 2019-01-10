@@ -2,15 +2,10 @@ package com.tma.jobmanager.target;
 
 public class CategoryJob{
 	private String m_name;
-	private Planned m_planned;
-	private Ongoing m_ongoing;
-	private Started m_stared;
+	private States[] m_state = {new Planned(), new Ongoing(), new Started()};
 	
 	public CategoryJob(String name) {
 		this.m_name = name;
-		this.m_planned = null;
-		this.m_ongoing = null;
-		this.m_stared = null;
 	}
 	public String getName() {
 		return m_name;
@@ -18,23 +13,17 @@ public class CategoryJob{
 	public void setName(String name) {
 		this.m_name = name;
 	}
-	public Planned getPlanned() {
-		return m_planned;
+	public States[] getState() {
+		return m_state;
 	}
-	public void setPlanned(Planned m_planned) {
-		this.m_planned = m_planned;
+	public void setArrState(States[] state) {
+		this.m_state = state;
 	}
-	public Ongoing getOngoing() {
-		return m_ongoing;
+	public void addState(States state,int i){
+		this.m_state[i]=state;
 	}
-	public void setOngoing(Ongoing m_ongoing) {
-		this.m_ongoing = m_ongoing;
+
+	public void test(Planned planned){
+		this.m_state[0] = planned;
 	}
-	public Started getStarted() {
-		return m_stared;
-	}
-	public void setStarted(Started m_stared) {
-		this.m_stared = m_stared;
-	}
-	
 }

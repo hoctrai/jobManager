@@ -103,11 +103,12 @@ public class OpenFile {
 		TreeNode parent = null;
 		
 		while(!m_stringQueue.isEmpty()){
-			
 			if(m_stringQueue.peek().substring(0, 4).equals("<h1>")) {
+				
 				Target target = new Target(m_stringQueue.peek());
 				String strParent = m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5);
 				parent = new TreeNode(strParent);
+				
 				parent.setTarget(target);
 				parent.setId(Integer.parseInt(strParent.replaceAll("Target: ", "")));
 				m_stringQueue.remove();
@@ -132,67 +133,67 @@ public class OpenFile {
 				
 			}else if(m_stringQueue.peek().substring(0, 4).equals("<h3>") && parent!=null) {
 				
+				States state;
+				
 				if(m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5).equals("Planned")){
-					Planned planned = new Planned();
-//					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setPlanned(planned);
+					state = new Planned();
 					m_stringQueue.remove();
 					
 					while(!m_stringQueue.peek().substring(0, 4).equals("<h3>")){
-						planned.setStatus("Planned");
-						//parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).getPlanned().setStrPlan(m_stringQueue.peek());
-						planned.setStrPlan(m_stringQueue.peek());
+						state.setStatus("Planned");
+						state.addData(m_stringQueue.peek());
 						m_stringQueue.remove();
 							
 					}
-					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setPlanned(planned);
+					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).addState(state,0);
 				}
 				
 				else if(m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5).equals("Ongoing")) {
-					Ongoing ongoing = new Ongoing();
-					//parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setOngoing(ongoing);
+					state = new Ongoing();
 					m_stringQueue.remove();
 					
 					while(!m_stringQueue.peek().substring(0, 4).equals("<h3>")) {
-						ongoing.setStatus("ongoing");
-						ongoing.setStrOngoing(m_stringQueue.peek());
-						//parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).getOngoing().setStrOngoing(m_stringQueue.peek());
+						state.setStatus("ongoing");
+						state.addData(m_stringQueue.peek());
 						m_stringQueue.remove();
 					}
-					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setOngoing(ongoing);
+					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).addState(state,1);
 				}
 				
 				else if(m_stringQueue.peek().substring(4, m_stringQueue.peek().length()-5).equals("Started")) {
-					Started started = new Started();
-					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).setStarted(started);
+					state= new Started();
+					parent.getTarget().getListCategoryJobs().get(parent.getTarget().getListCategoryJobs().size()-1).addState(state,2);
 					m_stringQueue.remove();
 
 				}
 				
-				
 			}else {				
 				if(m_stringQueue.peek().substring(0,5).equals("Timer")){
-					
 					try {
+						
 						parent.getTarget().setTimerTasks(Integer.parseInt(m_stringQueue.peek().substring(13,m_stringQueue.peek().length())));
 					} catch (NumberFormatException e) {
+						
 						parent.getTarget().setStrTimerTasks(m_stringQueue.peek().substring(13,m_stringQueue.peek().length()));
 					}
 					m_stringQueue.remove();
 				
 				}else if(m_stringQueue.peek().substring(0,7).equals("Managed")){
 					try{
+						
 						parent.addStrJobs(m_stringQueue.peek());
 					}catch (Exception e) {
+						
 						e.printStackTrace();
 					}
 					m_stringQueue.remove();
-				}
-				else{
+					
+				}else{
 					try{
 						
 						int i = parent.getTarget().getListCategoryJobs().size()-1;
-						parent.getTarget().getListCategoryJobs().get(i).getStarted().setStrStarter(m_stringQueue.peek());
-						parent.getTarget().getListCategoryJobs().get(i).getStarted().setStatus("started");
+						parent.getTarget().getListCategoryJobs().get(i).getState()[2].addData(m_stringQueue.peek());
+						parent.getTarget().getListCategoryJobs().get(i).getState()[2].setStatus("started");
 						
 					}catch(Exception e){
 						e.printStackTrace();

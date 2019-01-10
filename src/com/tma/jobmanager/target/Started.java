@@ -3,27 +3,35 @@ package com.tma.jobmanager.target;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Started {
+public class Started extends States{
 	
 	private String strStatus;
-	private List<String> m_strStarter;
-	
+	private List<String> m_strData;
+
 	public Started() {
 		this.strStatus = "";
-		this.m_strStarter = new ArrayList<>();
+		this.m_strData = new ArrayList<>();
 	}
 	
+	@Override
 	public String getStatus() {
 		return strStatus;
 	}
+	@Override
 	public void setStatus(String status) {
 		this.strStatus = status;
 	}
 
-	public List<String> getStrStarter() {
-		return m_strStarter;
+	@Override
+	public List<String> getListData() {
+		return m_strData;
 	}
-	public void setStrStarter(String strStarter) {
-		this.m_strStarter.add(strStarter);
+	@Override
+	public void addData(String strStarter) {
+		this.m_strData.add(strStarter);
+	}
+	@Override
+	public void setListData(List<String> listData){
+		this.m_strData = listData;
 	}
 }

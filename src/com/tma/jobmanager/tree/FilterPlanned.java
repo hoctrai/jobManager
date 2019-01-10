@@ -1,16 +1,12 @@
 package com.tma.jobmanager.tree;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.eclipse.jface.viewers.TreeViewer;
 
 import com.tma.jobmanager.target.CategoryJob;
 import com.tma.jobmanager.target.Target;
 
 public class FilterPlanned implements FilterStates{
-	TreeViewer viewer;
-	List<String> m_categoryJobs = new ArrayList<>();
+	
 	TreeNode m_root = new TreeNode("root");
 	
 	public FilterPlanned(){
@@ -27,7 +23,7 @@ public class FilterPlanned implements FilterStates{
 				for (int j = 0; j < listCategoryJobs.size() ; j++) {
 					
 					CategoryJob categoryJob = listCategoryJobs.get(j);
-					String status = categoryJob.getPlanned().getStatus();
+					String status = categoryJob.getState()[0].getStatus();
 					if (status.equals("Planned")) {
 						
 						node = root.getChildren().get(i);

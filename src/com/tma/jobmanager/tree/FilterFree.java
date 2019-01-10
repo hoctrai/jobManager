@@ -44,20 +44,20 @@ public class FilterFree {
 				Object newInput) {
 	      }
 	    });
+		
 		m_root = arrangementTree.sortTree(getRootNode(shell));
-		
 		viewer.setInput(m_root);
-		
 		return viewer;
-		
 	}
 	
 	private TreeNode getRootNode(Shell shell){
 	
 		TreeNode root = new TreeNode("");
 		m_openFile.diagogOpenFile(shell);
+		
 		if(m_openFile.getPath()!=null)
 			root = m_openFile.getTargets();
+		
 		return root;
 		
 	}

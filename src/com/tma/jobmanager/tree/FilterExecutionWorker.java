@@ -1,18 +1,17 @@
 package com.tma.jobmanager.tree;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.tma.jobmanager.target.CategoryJob;
 import com.tma.jobmanager.target.Target;
 
 public class FilterExecutionWorker implements FilterStates {
-	List<String> m_categoryJobs = new ArrayList<>();
+
 	private TreeNode m_root = new TreeNode("root");
-	
 	public FilterExecutionWorker(){
 		
 	}
+	
 	@Override
 	public TreeNode filter(TreeNode root) {
 		TreeNode node = new TreeNode("");
@@ -24,8 +23,8 @@ public class FilterExecutionWorker implements FilterStates {
 				for (int j = 0; j < listCategoryJobs.size() ; j++) {
 					
 					CategoryJob categoryJob = listCategoryJobs.get(j);
-					String status = categoryJob.getStarted().getStatus();
-					if (status.equals("started")) {
+					String status = categoryJob.getState()[2].getStatus();
+					if (status.equalsIgnoreCase("started")) {
 						
 						node = root.getChildren().get(i);
 						this.m_root.addChild(node);

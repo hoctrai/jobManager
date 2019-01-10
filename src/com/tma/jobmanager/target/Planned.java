@@ -3,28 +3,36 @@ package com.tma.jobmanager.target;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Planned {
+public class Planned extends States {
 
-	private List<String> m_strPlan ;
+	private List<String> m_strData ;
 	private String strStatus;
 	
 	public Planned() {
 		this.strStatus = "";
-		this.m_strPlan = new ArrayList<>();
+		this.m_strData = new ArrayList<>();
 		
 	}
 	
+	@Override
 	public String getStatus() {
 		return strStatus;
 	}
+	@Override
 	public void setStatus(String status) {
 		this.strStatus = status;
 	}
 
-	public List<String> getStrPlan() {
-		return m_strPlan;
+	@Override
+	public List<String> getListData() {
+		return m_strData;
 	}
-	public void setStrPlan(String strPlan) {
-		this.m_strPlan.add(strPlan);
+	@Override
+	public void addData(String strOngoing) {
+		this.m_strData.add(strOngoing);
+	}
+	@Override
+	public void  setListData(List<String> listData){
+		this.m_strData = listData;
 	}
 }

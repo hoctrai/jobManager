@@ -6,6 +6,7 @@ import com.tma.jobmanager.target.CategoryJob;
 import com.tma.jobmanager.target.Target;
 
 public class FilterWorkedPool implements FilterStates{
+	
 	private TreeNode m_root = new TreeNode("root");
 	
 	public FilterWorkedPool(){
@@ -23,7 +24,7 @@ public class FilterWorkedPool implements FilterStates{
 				for (int j = 0; j < listCategoryJobs.size() ; j++) {
 					
 					CategoryJob categoryJob = listCategoryJobs.get(j);
-					String status = categoryJob.getOngoing().getStatus();
+					String status = categoryJob.getState()[1].getStatus();
 					if (status.equals("ongoing")) {
 						
 						node = root.getChildren().get(i);

@@ -18,8 +18,8 @@ public class TreeCategory {
 			List<CategoryJob> listCategory = root.getChildren().get(i).getTarget().getListCategoryJobs();
 			
 			while(listCategory.size() > j){
-				if(listCategory.get(j).getPlanned().getStrPlan().size() > 0 | listCategory.get(j).getOngoing().getStrOngoing().size()>0 | 
-						listCategory.get(j).getStarted().getStrStarter().size()>0){
+				for(int k = 0; k < 3; k++)
+				if(!listCategory.get(j).getState()[k].getStatus().equals("")){
 					
 					CategoryJob job = listCategory.get(j);
 					TreeNode node = root.getChildren().get(i);

@@ -13,9 +13,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
-import com.tma.jobmanager.target.Ongoing;
-import com.tma.jobmanager.target.Planned;
-import com.tma.jobmanager.target.Started;
+import com.tma.jobmanager.target.States;
 import com.tma.jobmanager.target.Target;
 import com.tma.jobmanager.tree.ReadStates;
 
@@ -96,9 +94,10 @@ public class RightComposite extends Composite {
 	
 	public void showDataTarget(Target target){
 		
-		Planned planned;
-		Started started;
-		Ongoing ongoing;
+//		Planned planned;
+//		Started started;
+//		Ongoing ongoing;
+		States state;
 		int n = 0;
 		String s = target.getName();
 		String NameTarget =  s.substring(4,s.length()-5);
@@ -109,76 +108,105 @@ public class RightComposite extends Composite {
 		for (int i = 0; i<target.getListCategoryJobs().size(); i++){
 			
 			int j = 0;
-			n=target.getListCategoryJobs().get(i).getPlanned().getStrPlan().size();
-			if(n>0){
-				s = target.getListCategoryJobs().get(i).getName();
-				planned = target.getListCategoryJobs().get(i).getPlanned();
-				nameCategory = s.substring(4, s.length()-5);
-//				for(int j = 0; j <n; j++
-				int t = 0;
-				while(j < n){
-					
-					s= planned.getStrPlan().get(t);
-					String[] strParent = s.split(",");
-					String[] strChild = strParent[0].split(":");
-					id = strChild [0];
-					type = strChild[2];
-					
-					states.read(strParent);
-					
-					m_item.get(j).setText(new String[] {NameTarget,nameCategory, id, type,  states.getSubmit(), states.getStart(), states.getTimeout(), states.getServer()});
-					System.out.println("rightComposite:    row:  	155   " + j+ "	id:		"+ id);
-					t++;
-					j++;
-				}
+			for(int k = 0; k < 3; k++){
 				
-				//m_item.get(n).setText(new String[] {"", "", "", "", "", "", "", ""});
-				
-			}
-			n = n + target.getListCategoryJobs().get(i).getOngoing().getStrOngoing().size();
-			if(n > j){
-				s = target.getListCategoryJobs().get(i).getName();
-				ongoing = target.getListCategoryJobs().get(i).getOngoing();
-				nameCategory = s.substring(4, s.length()-5);
-				
-				int t = 0;
-				while(j<n){
+				n=target.getListCategoryJobs().get(i).getState()[k].getListData().size();
+				if(n>j){
+					s = target.getListCategoryJobs().get(i).getName();
+					state = target.getListCategoryJobs().get(i).getState()[k];
+					nameCategory = s.substring(4, s.length()-5);
+//					for(int j = 0; j <n; j++
+					int t = 0;
+					while(j < n){
+						
+						s= state.getListData().get(t);
+						String[] strParent = s.split(",");
+						String[] strChild = strParent[0].split(":");
+						id = strChild [0];
+						type = strChild[2];
+						
+						states.read(strParent);
+						
+						m_item.get(j).setText(new String[] {NameTarget,nameCategory, id, type,  states.getSubmit(), states.getStart(), states.getTimeout(), states.getServer()});
+						System.out.println("rightComposite:    row:  	155   " + j+ "	id:		"+ id);
+						t++;
+						j++;
+					}
 					
-					s= ongoing.getStrOngoing().get(t);
-					String[] strParent = s.split(",");
-					String[] strChild = strParent[0].split(":");
+					//m_item.get(n).setText(new String[] {"", "", "", "", "", "", "", ""});
 					
-					id = strChild [0];
-					type = strChild[2];
-					
-					states.read(strParent);
-					m_item.get(j).setText(new String[] {NameTarget,nameCategory, id, type,  states.getSubmit(), states.getStart(), states.getTimeout(), states.getServer()});
-					
-					j++;
-					t++;
 				}
 			}
-			
-			n = n + target.getListCategoryJobs().get(i).getStarted().getStrStarter().size();
-			if(n > j){
-				s = target.getListCategoryJobs().get(i).getName();
-				started = target.getListCategoryJobs().get(i).getStarted();
-				nameCategory = s.substring(4, s.length()-5);
-				int t = 0;
-				while(j < n){
-					s= started.getStrStarter().get(t);
-					String[] strParent = s.split(",");
-					String[] strChild = strParent[0].split(":");
-					id = strChild [0];
-					type = strChild[2];
-					
-					states.read(strParent);
-					m_item.get(j).setText(new String[] {NameTarget,nameCategory, id, type,  states.getSubmit(), states.getStart(), states.getTimeout(), states.getServer()});
-					
-					j++;
-					t++;
-				}
-			}
+//			n=target.getListCategoryJobs().get(i).getPlanned().getStrPlan().size();
+//			if(n>0){
+//				s = target.getListCategoryJobs().get(i).getName();
+//				planned = target.getListCategoryJobs().get(i).getPlanned();
+//				nameCategory = s.substring(4, s.length()-5);
+////				for(int j = 0; j <n; j++
+//				int t = 0;
+//				while(j < n){
+//					
+//					s= planned.getStrPlan().get(t);
+//					String[] strParent = s.split(",");
+//					String[] strChild = strParent[0].split(":");
+//					id = strChild [0];
+//					type = strChild[2];
+//					
+//					states.read(strParent);
+//					
+//					m_item.get(j).setText(new String[] {NameTarget,nameCategory, id, type,  states.getSubmit(), states.getStart(), states.getTimeout(), states.getServer()});
+//					System.out.println("rightComposite:    row:  	155   " + j+ "	id:		"+ id);
+//					t++;
+//					j++;
+//				}
+//				
+//				//m_item.get(n).setText(new String[] {"", "", "", "", "", "", "", ""});
+//				
+//			}
+//			n = n + target.getListCategoryJobs().get(i).getOngoing().getStrOngoing().size();
+//			if(n > j){
+//				s = target.getListCategoryJobs().get(i).getName();
+//				ongoing = target.getListCategoryJobs().get(i).getOngoing();
+//				nameCategory = s.substring(4, s.length()-5);
+//				
+//				int t = 0;
+//				while(j<n){
+//					
+//					s= ongoing.getStrOngoing().get(t);
+//					String[] strParent = s.split(",");
+//					String[] strChild = strParent[0].split(":");
+//					
+//					id = strChild [0];
+//					type = strChild[2];
+//					
+//					states.read(strParent);
+//					m_item.get(j).setText(new String[] {NameTarget,nameCategory, id, type,  states.getSubmit(), states.getStart(), states.getTimeout(), states.getServer()});
+//					
+//					j++;
+//					t++;
+//				}
+//			}
+//			
+//			n = n + target.getListCategoryJobs().get(i).getStarted().getStrStarter().size();
+//			if(n > j){
+//				s = target.getListCategoryJobs().get(i).getName();
+//				started = target.getListCategoryJobs().get(i).getStarted();
+//				nameCategory = s.substring(4, s.length()-5);
+//				int t = 0;
+//				while(j < n){
+//					s= started.getStrStarter().get(t);
+//					String[] strParent = s.split(",");
+//					String[] strChild = strParent[0].split(":");
+//					id = strChild [0];
+//					type = strChild[2];
+//					
+//					states.read(strParent);
+//					m_item.get(j).setText(new String[] {NameTarget,nameCategory, id, type,  states.getSubmit(), states.getStart(), states.getTimeout(), states.getServer()});
+//					
+//					j++;
+//					t++;
+//				}
+//			}
 		}
 	}
 	
@@ -195,21 +223,28 @@ public class RightComposite extends Composite {
 			String namePlan = "<h3>Planned</h3>";
 			str = str + "\n" + nameCategory + "\n" + namePlan;
 			
-			n = target.getListCategoryJobs().get(i).getPlanned().getStrPlan().size();
-			for(int j = 0; j < n; j++){
-				String planned = target.getListCategoryJobs().get(i).getPlanned().getStrPlan().get(j);
-				str = str + "\n" + planned;
+			for(int j = 0; j < 3; j++){
+				n = target.getListCategoryJobs().get(i).getState()[j].getListData().size();
+				for(int k = 0; k < n; k++){
+					String strData = target.getListCategoryJobs().get(i).getState()[j].getListData().get(k);
+					str = str + "\n" + strData;
+				}
+				if(j == 1 ){
+					str = str +  "\n" + ongoing;
+				}
+				else if( j == 2 )
+					str = str +  "\n" + started;
 			}
 			
-			str = str +  "\n" + ongoing;
-			n = target.getListCategoryJobs().get(i).getOngoing().getStrOngoing().size();
-			for(int j = 0; j < n; j++)
-				str = str + "\n" + target.getListCategoryJobs().get(i).getOngoing().getStrOngoing().get(j);
-			
-			str = str + "\n" + started;
-			n = target.getListCategoryJobs().get(i).getStarted().getStrStarter().size();
-			for(int j = 0; j < n; j++)
-				str = str + "\n" + target.getListCategoryJobs().get(i).getStarted().getStrStarter().get(j);
+//			str = str +  "\n" + ongoing;
+//			n = target.getListCategoryJobs().get(i).getOngoing().getStrOngoing().size();
+//			for(int j = 0; j < n; j++)
+//				str = str + "\n" + target.getListCategoryJobs().get(i).getOngoing().getStrOngoing().get(j);
+//			
+//			str = str + "\n" + started;
+//			n = target.getListCategoryJobs().get(i).getStarted().getStrStarter().size();
+//			for(int j = 0; j < n; j++)
+//				str = str + "\n" + target.getListCategoryJobs().get(i).getStarted().getStrStarter().get(j);
 		}
 		String strJobPerFamily = "<h2>Executing jobs per Family</h2>";
 		str = str + "\n" + strJobPerFamily +"\n"+ target.getJobsPerJobFamily();

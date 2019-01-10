@@ -29,7 +29,7 @@ public class BottomComposite extends Composite {
 
 	}
 	
-	public void clickNode(){
+	public void selectView(){
 		
 		m_leftComposite.m_viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			Target target;
@@ -39,13 +39,12 @@ public class BottomComposite extends Composite {
 					try{
 						IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 						String strTarget = selection.getFirstElement().toString();
-						target = findObject(strTarget);
+						target = getTaget(strTarget);
 						m_rightComposite.showDataTarget(target);
 						m_rightComposite.showRunTarget(target);
 						System.out.println("\n");
 						
 					}catch (Exception e) {
-						System.out.println("bottomComposite:  row:  47 ");
 						e.printStackTrace();
 					}
 				}
@@ -53,7 +52,7 @@ public class BottomComposite extends Composite {
 		});
 	}
 	
-	public  Target findObject(String strTarget) {
+	public  Target getTaget(String strTarget) {
 		Target target ;
 		try{
 			
@@ -103,7 +102,7 @@ public class BottomComposite extends Composite {
 		m_rightComposite.setLayoutData(gd_rightComposite);
 		m_rightComposite.windowExecute(getShell());
 		
-		clickNode();
+		selectView();
 		
 	}
 	
