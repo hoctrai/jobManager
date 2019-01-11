@@ -103,7 +103,6 @@ public class MenuMain {
 			public void widgetSelected(SelectionEvent e) {
 				Shell parent = (Shell) minItem.getParent().getParent();
 				parent.setMaximized(false);
-				
 			}
 			
 			@Override
